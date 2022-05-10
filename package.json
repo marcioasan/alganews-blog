@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "marcioasan-sdk": "^2.7.0",
     "next": "12.1.5",
     "polished": "4.1.3",
     "react": "18.1.0",
