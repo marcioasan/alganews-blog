@@ -30,13 +30,13 @@ const Home: NextPage = () => {
             title: "Como fazer X coisas com React.js",
             imageUrls: {
               default:
-                "https://storage.googleapis.com/alganews-files/posts/avatar-joao.jpeg",
+                "/laptop.jpeg",
               small:
-                "https://storage.googleapis.com/alganews-files/posts/avatar-joao-small.jpeg",
+                "/laptop.jpeg",
               medium:
-                "https://storage.googleapis.com/alganews-files/posts/avatar-joao-medium.jpeg",
+                "/laptop.jpeg",
               large:
-                "https://storage.googleapis.com/alganews-files/posts/avatar-joao-large.jpeg",
+                "/laptop.jpeg",
             },
             editor: {
               id: 29,
