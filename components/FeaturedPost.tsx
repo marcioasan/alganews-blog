@@ -78,6 +78,11 @@ const Tags = styled.ul`
   list-style: none;
   display: flex;
   gap: 8px;
+
+  //11.21. Responsividade no Post em destaque - 3'30"
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `;
 
 const Tag = styled.li`
