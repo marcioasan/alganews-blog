@@ -1,4 +1,6 @@
 import { Post } from "marcioasan-sdk";
+import Link from "next/link";
+import { transparentize } from "polished";
 import styled from "styled-components";
 import Avatar from "./Avatar";
 
@@ -7,7 +9,10 @@ interface FeaturedPostProps {
 }
 
 export default function FeaturedPost(props: FeaturedPostProps) {
+  const {id, slug} = props.postSummary
   return (
+    /* 11.20. Adicionando um link no post de destaque - 1'30" */
+    <Link href={`/posts/${id}/${slug}`} passHref> 
     <Wrapper>
       <BgImage bg={props.postSummary.imageUrls.medium}/>
       <Content>
@@ -26,6 +31,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
         <Title>{props.postSummary.title}</Title>        
       </Content>  
     </Wrapper>
+    </Link>
   );
 }
 
@@ -47,7 +53,7 @@ const BgImage = styled.div<{ bg: string }>`
   opacity: 0.05;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.a`
   position: relative;  
   background-color: ${(p) => p.theme.primaryBackground};
   color: ${(p) => p.theme.primaryForeground};
@@ -56,8 +62,16 @@ const Wrapper = styled.div`
   padding: 32px;  
   width: 100%;
   min-height: 256px;
+  text-decoration: none;
   display: flex;
   align-items: center;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px
+      ${(p) => transparentize(0.7, p.theme.primaryBackground)};
+  }
 `;
 
 const Tags = styled.ul`
