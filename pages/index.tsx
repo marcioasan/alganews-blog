@@ -28,6 +28,7 @@ export default function Home(props: HomeProps) {
   )
 }
 
+//11.22. getServerSideProps vs useEffect
 export async function getServerSideProps() {
   const posts = await PostService.getAllPosts({ page: 0 });
   return {
