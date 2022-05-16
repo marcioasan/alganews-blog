@@ -1,10 +1,11 @@
+import { ServerResponse } from 'http';
 import { Post, PostService } from 'marcioasan-sdk'
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import FeaturedPost from '../components/FeaturedPost'
 
 interface HomeProps {
-  posts: Post.Paginated;
+  posts?: Post.Paginated;
 }
 
 export default function Home(props: HomeProps) {
@@ -24,10 +25,32 @@ export default function Home(props: HomeProps) {
   )
 }
 
+//11.24. Validando parâmetros - 12'
+function sendToHomePage(res: ServerResponse){
+  res.statusCode = 302;
+  res.setHeader('Location', '/?page=1');
+  return { props: {} };
+}
+
+
 //11.23. Recuperando parâmetros da Query String
-export const getServerSideProps: GetServerSideProps<HomeProps> = async (context) => {
-  const { page } = context.query;
+export const getServerSideProps: GetServerSideProps<HomeProps> = async (
+  //11.24. Validando parâmetros - 13'30"
+  { query, res }
+  ) => {
+  const { page: _page } = query;
+  const page = Number(_page)
+
+  //11.24. Validando parâmetros - 4'
+  if(isNaN(page) || page < 1){
+    return sendToHomePage(res);
+  }
+
   const posts = await PostService.getAllPosts({ page: Number(page) - 1 });
+
+  if(!posts.content?.length){
+    return sendToHomePage(res);
+  }
 
   return {
     props: {
