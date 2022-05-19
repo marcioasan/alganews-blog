@@ -33,6 +33,7 @@ export default function Home(props: HomeProps) {
       </PostsGrid>
       
       <ReactPaginate 
+        containerClassName={"Pagination"}
         //11.29. React Paginate com SSR
         pageCount={posts?.totalPages || 0}
         marginPagesDisplayed={0}
