@@ -5,9 +5,16 @@ import { ParsedUrlQuery } from "querystring";
 
 interface PostProps {
   post?: Post.Datailed;
+  error?: {
+    message: string;
+  }
 }
 
 export default function PostPage(props: PostProps) {
+  //11.33. Recebendo informações do erro na página - 3'30"
+  if (props.error)
+    return <div style={{ color: "red" }}>{props.error.message}</div>;
+
   return <div>{props.post?.title}</div>;
 }
 
@@ -32,9 +39,15 @@ export const getServerSideProps: GetServerSideProps<PostProps, Params> =
           post,
         },
       };
-    } catch (err) {
+    } catch (error: any) { //precisou tipar como any, pois estava com erro. ver pergunta no suporte. https://app.algaworks.com/forum/topicos/85875/erro-no-error
+      console.log(error)
       return {
-        props: {},
+        props: {
+          //11.33. Recebendo informações do erro na página
+          error: {
+            message: error.message
+          }
+        },
       };
     }
   };
