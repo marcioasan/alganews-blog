@@ -1,9 +1,9 @@
 //11.31. Parâmetros nas rotas - 2', 11.32. Introdução à tratativa de erros com Next
+//11.38. Adicionando o slug na URL - 2' - o nome do arquivo foi renomeado para [...pid].tsx
 import { Post, PostService } from "marcioasan-sdk";
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { ResourceNotFoundError, InvalidDataError } from "marcioasan-sdk/dist/errors"
-import CustomError from "marcioasan-sdk/dist/CustomError";
+import { ResourceNotFoundError } from "marcioasan-sdk/dist/errors"
 
 interface PostProps extends NextPageProps {
   post?: Post.Datailed;
@@ -18,15 +18,14 @@ export default function PostPage(props: PostProps) {
 }
 
 interface Params extends ParsedUrlQuery {
-  id: string;
+  pid: string[];
 }
 
 export const getServerSideProps: GetServerSideProps<PostProps, Params> =
   async ({ params }) => {
     try {
       if (!params) return { notFound: true };
-
-      const { id } = params;
+      const [id, slug] = params.pid; //11.38. Adicionando o slug na URL - 4'30"
       const postId = Number(id);
 
       if (isNaN(postId)) return { notFound: true };
