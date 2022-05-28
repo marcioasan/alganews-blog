@@ -2,6 +2,8 @@
 import { Post, PostService } from "marcioasan-sdk";
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
+import { ResourceNotFoundError, InvalidDataError } from "marcioasan-sdk/dist/errors"
+import CustomError from "marcioasan-sdk/dist/CustomError";
 
 interface PostProps extends NextPageProps {
   post?: Post.Datailed;
@@ -37,7 +39,10 @@ export const getServerSideProps: GetServerSideProps<PostProps, Params> =
         },
       };
     } catch (error: any) { //precisou tipar como any, pois estava com erro. ver pergunta no suporte. https://app.algaworks.com/forum/topicos/85875/erro-no-error
-      console.log(error)
+      //11.36. Identificando erros com instanceof - 2'
+      if(error instanceof ResourceNotFoundError) { 
+        return { notFound: true };
+      }
       return {
         props: {
           //11.33. Recebendo informações do erro na página
