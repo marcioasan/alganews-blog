@@ -42,7 +42,8 @@ export const getServerSideProps: GetServerSideProps<PostProps, Params> =
         props: {
           //11.33. Recebendo informações do erro na página
           error: {
-            message: error.message
+            message: error.message,
+            statusCode: error.data?.status || 500,
           }
         },
       };
