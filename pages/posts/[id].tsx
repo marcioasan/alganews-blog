@@ -3,17 +3,14 @@ import { Post, PostService } from "marcioasan-sdk";
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 
-interface PostProps {
+interface PostProps extends NextPageProps {
   post?: Post.Datailed;
-  error?: {
-    message: string;
-  }
 }
 
 export default function PostPage(props: PostProps) {
   //11.33. Recebendo informações do erro na página - 3'30"
-  if (props.error)
-    return <div style={{ color: "red" }}>{props.error.message}</div>;
+  // if (props.error) //removido na aula 11.34. Reutilizando a lógica de renderização de erro - 5'20"
+  //   return <div style={{ color: "red" }}>{props.error.message}</div>;
 
   return <div>{props.post?.title}</div>;
 }
