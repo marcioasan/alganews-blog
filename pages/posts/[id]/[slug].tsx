@@ -4,6 +4,7 @@ import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { ResourceNotFoundError } from "marcioasan-sdk/dist/errors";
 import Head from "next/head";
+import PostHeader from "../../../components/PostHeader";
 
 interface PostProps extends NextPageProps {
   post?: Post.Datailed;
@@ -11,13 +12,27 @@ interface PostProps extends NextPageProps {
 }
 
 export default function PostPage(props: PostProps) {
+  //11.41. Desafio - PostHeader
+  const { post } = props;
+
   //11.40. URL Canônica - 1'40"
   return(
     <>
       <Head>
-        <link rel="canonical" href={`http://localhost:3000/posts/${props.post?.id}/${props.post?.slug}`} />
+        <link 
+          rel="canonical" 
+          href={`http://localhost:3000/posts/${props.post?.id}/${props.post?.slug}`} />
       </Head>
-      <div>{props.post?.title}</div>
+      {post && (
+        <>
+          <PostHeader
+            thumbnail={post?.imageUrls.large}
+            createdAt={post?.createdAt}
+            editor={post?.editor}
+            title={post?.title}          
+          />
+        </>
+      )}    
     </>
   );
 }
