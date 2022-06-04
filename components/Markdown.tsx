@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm"
 
 interface MarkdownProps {
   children: string;
@@ -6,7 +7,7 @@ interface MarkdownProps {
 
 export default function Markdown(props: MarkdownProps) {
   return (
-    <ReactMarkdown className={"MarkdownRenderer"}>
+    <ReactMarkdown className={"MarkdownRenderer"} plugins={[gfm]}>
       {props.children}
     </ReactMarkdown>
   );
