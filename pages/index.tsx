@@ -63,7 +63,11 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   { query, res }
   ) => {
   const { page: _page } = query;
-  const page = Number(_page)
+  
+  //11.51. Definindo o page como parâmetro opcional - 4'30"
+  const page = _page ? Number(_page) : 1;
+  //const page = Number(_page)
+
 
   //11.24. Validando parâmetros - 4'
   if(isNaN(page) || page < 1){
