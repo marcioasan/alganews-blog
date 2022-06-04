@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@badrap/bar-of-progress": "0.1.2",
     "@reduxjs/toolkit": "^1.8.2",
     "babel-plugin-styled-components": "^1.13.2",
     "danielbonifacio-sdk": "^2.7.0",
