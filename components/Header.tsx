@@ -26,6 +26,12 @@ const Wrapper = styled.div`
   @media screen and (max-width: 767px) {
     height: ${MOBILE_HEADER_HEIGHT}px;
   }
+  
+  //11.53. Header fixo
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;  
 `;
 
 const Container = styled.div`
