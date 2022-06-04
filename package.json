@@ -13,6 +13,7 @@
     "babel-plugin-styled-components": "^1.13.2",
     "danielbonifacio-sdk": "^2.7.0",
     "date-fns": "2.22.1",
+    "disqus-react": "1.1.1",
     "marcioasan-sdk": "^2.7.0",
     "next": "11.0.1",
     "polished": "4.1.3",

@@ -1,5 +1,6 @@
 //11.39. Corrigindo o Slug
 import { Post, PostService } from "marcioasan-sdk";
+import { DiscussionEmbed } from 'disqus-react';
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { ResourceNotFoundError } from "marcioasan-sdk/dist/errors";
@@ -41,6 +42,16 @@ export default function PostPage(props: PostProps) {
             title={post?.title}          
           />
           <Markdown>{post.body}</Markdown>
+          {/* 11.48. Adicionando o Disqus - 5' */}
+          <DiscussionEmbed
+            shortname="alganews-12"
+            config={{
+              url: `http://${props.host}/${props.post?.id}/${props.post?.slug}`,
+              identifier: String(post.id),
+              title: post.title,
+              language: "pt_BR",
+            }}
+          /> 
         </>
       )}    
     </>
